@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+    <form name="loginForm" action="/login" onsubmit="return check()" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password" placeholder="Password" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Log In</button>
+    </form>
+    <script>
+        function check() {
+            if (document.forms["loginForm"]["username"].value === "") {
+                window.alert("Username can't be empty")
+                return false
+            }
+            else if (document.forms["loginForm"]["password"].value === "") {
+                window.alert("password can't be empty")
+                return false
+            }
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    My Posts
+{% endblock %}
+
+{% block main %}
+    <table class = "table table-striped">
+        <thead>
+            <tr>
+                <th>Animal</th>
+                <th>Animal breed</th>
+                <th>Months</th>
+                <th>Sex</th>
+                <th>City</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                        <td>
+                            {% if row.type == 'DOG' %}
+                                <i class="fas fa-dog"></i>
+                            {% else %}
+                                <i class="fas fa-cat"></i>
+                            {% endif %}
+                        </td>
+                        <td>{{ row.breed.lower() }}</td>
+                        <td>{{ row.age }}</td>
+                        <td>
+                            {% if row.genre == 'MALE' %}
+                                <i class="fas fa-male"></i>
+                            {% else %}
+                                <i class="fas fa-female"></i>
+                            {% endif %}
+                        </td>
+                        <td>{{ row.city_name }}</td>
+                        {% if row.status == 'AVAILABLE' %}
+                            <td class="text-success">Available</td>
+                            <td><button id={{row.id}} type="button" onclick="load(this.id)" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Delete</button></td>
+                        {% elif row.status == 'DONATED' %}
+                            <td class="text-primary">Donated</td>
+                            <td></td>
+                        {% else %}
+                            <td class="text-danger">Deleted</td>
+                            <td></td>
+                        {% endif %}
+                </tr>
+            {% endfor %}
+             <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Adoption's data</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div id="div-modal" class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            <form id="form" name="deleteForm" action="/myPosts" method="post">
+                                <input type="hidden" id="hidden" name="hidden">
+                                <button name="button" class="btn btn-danger" type="submit">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tbody>
+    </table>
+    <script>
+        function load(btId) {
+            let div = document.querySelector('#div-modal');
+            let id = btId;
+
+            let rows = {{ rows|tojson }};
+            const list = rows.filter( element => element.id == id);
+
+            let innerHTML = '';
+            for(let item of list) {
+                innerHTML += '<i class="fas fa-book"></i><strong> Description </strong> - '+ item.description + '<br>'
+                innerHTML += '<i class="fas fa-user"></i><strong> Owner name </strong> - '+ item.user_name + "<br>"
+                innerHTML += '<i class="fas fa-envelope"></i><strong> Owner email </strong> - '+ item.email + "<br>"
+                innerHTML += '<i class="fas fa-phone"></i><strong> Owner phone </strong> - '+ item.phonenumber + "<br><br>"
+                innerHTML += '<i class="fas fa-trash"></i><i><p style="display:inline" class="text-danger"> Are you sure you want to delete this post? </p></i><br><br>'
+            }
+            div.innerHTML = innerHTML;
+
+            //post
+            let form = document.querySelector('#form');
+            form.hidden.value = id;
+        }
+    </script>
+{% endblock %}

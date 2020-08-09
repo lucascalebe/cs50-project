@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block main %}
+        <form name="registerForm" action="/register"  onsubmit="return check()" method="post">
+            <div class="form-group">
+                <input autocomplete="off" autofocus class="form-control" name="username" placeholder="username" type="text">
+            </div>
+            <div class="form-group">
+                <input class="form-control" name="name" placeholder="Full name" type="text">
+            </div>
+            <div class="form-group">
+                <input class="form-control" name="email" type="email" placeholder="user@example.com" id="example-email-input">
+            </div>
+            <div class="form-group">
+                <input class="form-control" name="phonenumber" type="tel" placeholder="+1(555)555-5555" id="example-tel-input">
+            </div>
+            <div class="form-group">
+                <input class="form-control" name="password1" placeholder="Password" type="password">
+            </div>
+            <div class="form-group">
+                <input class="form-control" name="password2" placeholder="Password(again)" type="password">
+            </div>
+            <button id="submit" class="btn btn-primary" type="submit">Register</button>
+        </form>
+        <script>
+        function check() {
+            if (document.forms["registerForm"]["username"].value === "") {
+                window.alert("Username can't be empty")
+                return false
+            }
+            else if (document.forms["registerForm"]["name"].value === "") {
+                window.alert("Name can't be empty")
+                return false
+            }
+            else if (document.forms["registerForm"]["email"].value === "") {
+                window.alert("Email can't be empty")
+                return false
+            }
+            else if (document.forms["registerForm"]["phonenumber"].value === "") {
+                window.alert("Phone number can't be empty")
+                return false
+            }
+            else if (document.forms["registerForm"]["password1"].value === "" || document.forms["registerForm"]["password2"].value === "") {
+                window.alert("Password can't be empty")
+                return false
+            }
+            else if (document.forms["registerForm"]["password1"].value != document.forms["registerForm"]["password2"].value) {
+                window.alert("Password don't match")
+                return false
+            }
+            else if (document.forms["registerForm"]["password2"].value.length < 8) {
+                window.alert("Password must contain at least 8 characters")
+                return false
+            }
+        }
+        </script>
+{% endblock %}

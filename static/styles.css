@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap');
+
+* {
+    font-family: 'Nunito', sans-serif;
+}
+
+nav
+{
+    background-color:#497495;
+    color: #fff;
+}
+
+.navbar-brand
+{
+  /*padding: 0 15px;*/
+  height: 50px;
+  /*line-height: 50px;*/
+}
+
+
+.nav-title
+{
+    font-weight: 700;
+    margin-bottom: 0;
+    font-size:32px;
+    color: #fff;
+}
+
+a
+{
+    transition: color .25s ease-in-out;
+}
+
+body
+{
+    background-color:#fff;
+}
+
+.logo > img
+{
+    height: 63px;
+    margin-right: 12px;
+    margin-top: 0;
+    padding-bottom:15px;
+}
+
+main .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+
+}
+
+main
+{
+    /* scroll horizontally as needed */
+    overflow-x: auto;
+
+    /* center contents */
+    text-align: center;
+}
+
+main img
+{
+    /* constrain images on small screens */
+    max-width: 100%;
+}
+
+main table
+{
+    /* left-align contents */
+    text-align: left;
+}
+
+main tfoot
+{
+    /* boldface tables' footers */
+    font-weight: bold;
+}
+
+#div-modal
+{
+    text-align: left;
+    font-style: none;
+}
